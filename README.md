@@ -57,6 +57,10 @@ RIR-Reconstruction/
 ├── Results/                          # Saved models, scalers, and inference outputs
 │   ├── ICASSP/2025-09-13/...         # Example trained model checkpoint and scalers
 │
+├── training/                         # Training scripts
+│   ├── train_edcModelPytorchLighteningV3.py
+│   ├── utils.py
+│
 ├── inference_edcModelPytorchLighteningV3.py  # Main inference script
 ├── requirements.txt                  # Python dependencies (pinned versions)
 ├── environment.yml                   # Conda environment file
@@ -94,29 +98,75 @@ By default, the script:
 
 ---
 
+## 🏋️ Training the Model
+
+If you want to train the LSTM model from scratch, follow these steps:
+
+### Step 1 – Dataset Preparation
+
+* Place your **room features CSV** (`full_large_dataset.csv`) inside:
+
+  ```
+  dataset/room_acoustic_largedataset/
+  ```
+* Place the **EDC ground truth files** (`.npy`) inside:
+
+  ```
+  dataset/room_acoustic_largedataset/EDC/
+  ```
+
+Each row in the CSV corresponds to:
+
+```
+[room_id, length, width, height, absorption_band_1, ..., absorption_band_7, src_x, src_y, src_z, rec_x, rec_y, rec_z]
+```
+### Step 2 – Run Training
+
+```bash
+python training/train_edcModelPytorchLighteningV3.py
+```
+
+### Step 3 – Outputs
+
+* The trained model checkpoint will be saved under:
+
+  ```
+  Results/{date-time}/Trained_Models/best_model.ckpt
+  ```
+* Feature and target **scalers** will be saved in the same folder.
+* Training and validation loss curves are automatically logged.
+
+### Training Parameters (default)
+
+* Model: **LSTM → Dense(2048) → Output**
+* Hidden units: **128**
+* Dropout: **0.3**
+* Optimizer: **Adam (lr=0.001)**
+* Loss: **MSE + custom temporal decay loss**
+* Early stopping: **10 epochs patience**
+* Max epochs: **200**
+
+---
+
 ## 📊 Outputs
 
-After running inference, you’ll get:
+After training or inference, you’ll get:
 
 1. **Plots**
 
-   * `comparison_plot.png` – Full view of EDCs, RIRs, FFT
-   * `comparison_plot_Zoom.png` – Zoomed-in comparison
+   * EDC prediction vs. ground truth
+   * RIR waveform reconstruction
+   * FFT magnitude spectrum
 
 2. **Audio Files**
 
    * `predicted_rir.wav` – Predicted RIR reconstruction
    * `actual_rir.wav` – Ground truth RIR reconstruction
 
-3. **Statistics**
+3. **Metrics**
 
-   * Mean Squared Error (MSE) between predicted and actual EDCs
-
----
-
-## 🎧 Listening Tests
-
-The model’s reconstructed RIRs were further evaluated via **MUSHRA listening tests**, confirming perceptual plausibility of the synthesized responses. Results showed that the **Random Sign Sticky method** significantly outperformed the plain Random Sign approach in terms of subjective quality.
+   * Mean Squared Error (MSE)
+   * Optionally: correlation, log-spectral distance (LSD), SI-SDR, etc.
 
 ---
 
@@ -135,16 +185,8 @@ If you use this work, please cite:
 ```
 @inproceedings{YourCitation,
   title={Deep Learning-based RIR Reconstruction from EDCs},
-  author={Your Name et al.},
-  booktitle={ICASSP},
-  year={2025}
+  author={Imran Muhammad, Gerald Schuller},
+  booktitle={ICASSP-2026},
+  year={2026}
 }
 ```
-
----
-
-✨ With this setup, anyone can easily reproduce your inference pipeline by just running **one Python file**.
-
----
-
-Do you also want me to prepare a **Training Section** in the README (in case others want to retrain the model), or should we keep it **inference-only** for now?
