@@ -211,10 +211,10 @@ if __name__ == "__main__":
         use_defaults = input("Use default example values? (y/n): ").strip().lower()
 
         if use_defaults == "y":
-            length, width, height = 4.0, 5.0, 2.5
-            src = [1.5, 2.0, 1.2]
-            rec = [3.0, 3.5, 1.2]
-            absorption = [0.01, 0.014, 0.1, 0.19, 0.2, 0.21, 0.023]
+            length, width, height = 3.0, 4.0, 3.0
+            src = [1.4, 1.4, 1.5]
+            rec = [1.8, 3.0, 1.5]
+            absorption = [0.14, 0.27, 0.36, 0.3, 0.24, 0.24, 0.03]
         else:
             length = float(input("Length (m): "))
             width = float(input("Width (m): "))
