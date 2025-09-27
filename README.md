@@ -1,4 +1,8 @@
-# 🎧 **Room Impulse Response (RIR) Reconstruction using LSTM-based EDC Prediction**
+# **Room Impulse Response (RIR) Reconstruction using LSTM-based EDC Prediction**
+![Banner](https://img.shields.io/badge/ICASSP-2026-blue) 
+![Python](https://img.shields.io/badge/Python-3.10%2B-green) 
+![PyTorch](https://img.shields.io/badge/PyTorch-Lightning-orange) 
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
 ## 📌 1. Introduction
 
