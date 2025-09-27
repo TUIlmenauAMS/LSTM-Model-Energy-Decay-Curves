@@ -221,9 +221,9 @@ If you use this repository in your research, please cite:
 
 For inquiries, suggestions, or collaborations:
 
-* **Author:** Your Name
-* **Affiliation:** Audio & Acoustics Lab, Your University
-* **Email:** [your.email@example.com](mailto:your.email@example.com)
+* **Author:** Dr. Imran
+* **Affiliation:** Applied Media Systems, TU Ilmenau Germany
+* **Email:** [muhammad.imran@tu-ilmenau.de](mailto:muhammad.imran@tu-ilmenau.de)
 
 ---
 
