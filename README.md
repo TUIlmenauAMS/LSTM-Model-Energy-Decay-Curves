@@ -34,12 +34,12 @@ This framework is applicable to:
 .
 ├── dataset/
 │   └── room_acoustic_largedataset/
-│       ├── EDC/                       # Numpy .npy files containing reference EDCs
+│       ├── EDC/                       # Numpy .npy files containing reference EDCs (Download link below)
 │       ├── roomFeaturesDataset.csv    # Room geometry + material features
 │       └── dataSource.txt             # Dataset description
 │
 ├── Models/
-│   ├── best_model.ckpt               # Trained LSTM model checkpoint
+│   ├── best_model.ckpt               # Trained LSTM model checkpoint (Download link below)
 │   ├── scaler_X_*.save               # Scaler for input features
 │   └── scaler_edc_*.save             # Scaler for EDC predictions
 │
