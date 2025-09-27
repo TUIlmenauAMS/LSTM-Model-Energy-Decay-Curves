@@ -195,18 +195,25 @@ joblib==1.4.2
 
 If you use this repository in your research, please cite:
 
-> **Author et al.**
-> “Deep Learning-Based Room Impulse Response Reconstruction using LSTM Networks.”
-> *ICASSP 2025.*
-
 ```
-@inproceedings{Author2025RIR,
-  title={Deep Learning-Based Room Impulse Response Reconstruction using LSTM Networks},
-  author={Author, A. and Collaborator, B.},
-  booktitle={Proc. IEEE ICASSP},
-  year={2025}
+@inproceedings{Author2026RIR,
+  title={Deep learning-based prediction of energy decay curves from room geometry and material properties},
+  author={Imran MUhammad, Gerald Schuller},
+  booktitle={Proc. IEEE ICASSP 2026},
+  year={2026}
 }
 ```
+---
+
+```
+@inproceedings{Author2026RIR,
+  title={Room impulse response prediction with neural networks: from energy decay curves to perceptual validation},
+  author={Imran MUhammad, Gerald Schuller},
+  booktitle={Proc. IEEE ICASSP 2026},
+  year={2026}
+}
+```
+
 
 ---
 
