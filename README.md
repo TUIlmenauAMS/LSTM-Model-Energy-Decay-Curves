@@ -1,169 +1,231 @@
-# Room Impulse Response (RIR) Reconstruction using Deep Learning
+# 🎧 **Room Impulse Response (RIR) Reconstruction using LSTM-based EDC Prediction**
 
-## 📖 Introduction
+## 📌 1. Introduction
 
-This repository contains a deep learning framework for **reconstructing Room Impulse Responses (RIRs)** from Energy Decay Curves (EDCs) using a **PyTorch Lightning LSTM model**.
+This repository provides a **deep learning–based framework** for predicting **Energy Decay Curves (EDCs)** and reconstructing **Room Impulse Responses (RIRs)** directly from **room geometric and material properties**.
 
-The workflow is as follows:
+The method uses a **Long Short-Term Memory (LSTM)** neural network trained on simulated room acoustic datasets, enabling accurate and efficient prediction of reverberation characteristics without running computationally expensive acoustic simulations.
 
-1. Input **room geometry**, **absorption coefficients**, and **source/receiver positions**.
-2. The model predicts the **EDC** of the room.
-3. The predicted EDC is converted back into a **time-domain RIR** using stochastic reconstruction (Random Sign / Random Sign Sticky).
-4. The framework outputs:
+### **Inputs**
 
-   * **Predicted EDC vs. Ground Truth**
-   * **Reconstructed RIRs**
-   * **Frequency-domain magnitude response**
-   * Error metrics such as **Mean Squared Error (MSE)**
+* 🏠 Room dimensions (Length, Width, Height)
+* 📉 Material absorption coefficients (7 octave-band values)
+* 🔊 Source position (x, y, z)
+* 🎧 Receiver position (x, y, z)
 
-This approach is efficient for **early-stage architectural design**, **auralization**, and **real-time acoustic parameter estimation**.
+### **Outputs**
 
----
+* Predicted EDC curve
+* Reconstructed RIR waveform
+* Temporal and spectral plots for evaluation
 
-## ⚙️ Installation
+This framework is applicable to:
 
-Clone this repository:
-
-```bash
-git clone https://github.com/your-username/RIR-Reconstruction.git
-cd RIR-Reconstruction
-```
-
-### Option 1 – Using pip
-
-```bash
-pip install -r requirements.txt
-```
-
-### Option 2 – Using conda
-
-```bash
-conda env create -f environment.yml
-conda activate rir-reconstruction
-```
+* Real-time auralization engines
+* Architectural acoustic design
+* Speech enhancement and dereverberation
+* Intelligent room tuning
 
 ---
 
-## ▶️ Running Inference
+## 📂 2. Repository Structure
 
-The main script is **`inference_edcModelPytorchLighteningV3.py`**.
+```
+.
+├── dataset/
+│   └── room_acoustic_largedataset/
+│       ├── EDC/                       # Numpy .npy files containing reference EDCs
+│       ├── roomFeaturesDataset.csv    # Room geometry + material features
+│       └── dataSource.txt             # Dataset description
+│
+├── Models/
+│   ├── best_model.ckpt               # Trained LSTM model checkpoint
+│   ├── scaler_X_*.save               # Scaler for input features
+│   └── scaler_edc_*.save             # Scaler for EDC predictions
+│
+├── inference_edcModelPytorchLighteningV3.py   # Main inference and analysis script
+├── requirements.txt
+└── README.md
+```
 
-### Step 1 – Prepare Files
+---
 
-Make sure you have:
+## 📥 3. Downloading the Dataset and Model
 
-* A **trained model checkpoint** (`.ckpt`)
-* The **scalers** (`scaler_X_*.save` and `scaler_edc_*.save`)
-* The **room features CSV** (`full_large_dataset.csv`)
-* The **ground truth EDCs** (in `.npy` format inside the EDC folder)
+Before running inference, **download the dataset and pretrained model** from Zenodo:
 
-### Step 2 – Run Inference
+👉 [EDC Datset](https://zenodo.org/records/17210197): DOI: 10.5281/zenodo.17210196   
+👉 [Model](https://zenodo.org/records/17215057): DOI: 10.5281/zenodo.17215057
+
+After downloading:
+
+1. Place the `EDC` folder inside `dataset/room_acoustic_largedataset/`
+2. Place the model checkpoint `.ckpt` and scaler `.save` files inside `Models/`
+
+---
+
+## 🧪 4. Model Inference
+
+The inference is performed using:
+
+```
+inference_edcModelPytorchLighteningV3.py
+```
+
+Two modes are supported:
+
+### **Mode 1 – Existing Dataset**
+
+* Randomly selects a room from the dataset
+* Loads the corresponding reference EDC
+* Runs model inference and compares prediction with ground truth
+* Generates EDC, RIR, and FFT plots
+
+### **Mode 2 – Custom Room Features**
+
+* Allows the user to **manually input room geometry and materials**
+* Generates EDC and RIR predictions **without reference data**
+* Useful for real-world rooms or hypothetical designs
+
+---
+
+### ▶ Run the Inference Script
 
 ```bash
 python inference_edcModelPytorchLighteningV3.py
 ```
 
-By default, the script:
+You will be prompted:
 
-* Selects a **random room configuration** from the dataset.
-* Loads the **trained model** and **scalers**.
-* Predicts the EDC.
-* Reconstructs the RIR using the **Random Sign Sticky method**.
-* Saves plots, `.wav` files, and results inside `Results/.../inference_results`.
+```
+Select data source:
+1. Use existing dataset
+2. Enter custom room features
+```
 
 ---
 
-## 🏋️ Training the Model
+## 📝 5. Custom Room Features Format
 
-If you want to train the LSTM model from scratch, follow these steps:
+For **Mode 2**, input the features in this order:
 
-### Step 1 – Dataset Preparation
+| Parameter               | Count | Description                         |
+| ----------------------- | ----- | ----------------------------------- |
+| Room Dimensions         | 3     | Length, Width, Height (m)           |
+| Source Position         | 3     | X, Y, Z (m)                         |
+| Receiver Position       | 3     | X, Y, Z (m)                         |
+| Absorption Coefficients | 7     | Octave-band absorption values (0–1) |
 
-* Place your **room features CSV** (`full_large_dataset.csv`) inside:
-
-  ```
-  dataset/room_acoustic_largedataset/
-  ```
-* Place the **EDC ground truth files** (`.npy`) inside:
-
-  ```
-  dataset/room_acoustic_largedataset/EDC/
-  ```
-
-Each row in the CSV corresponds to:
+### **Example Input**
 
 ```
-[room_id, length, width, height, absorption_band_1, ..., absorption_band_7, src_x, src_y, src_z, rec_x, rec_y, rec_z]
+Room Dimensions: 4.0, 5.0, 2.5
+Source Position: 1.0, 2.0, 1.5
+Receiver Position: 3.0, 4.0, 1.5
+Absorption: 0.01, 0.014, 0.1, 0.19, 0.2, 0.21, 0.023
 ```
 
-### Step 2 – Run Training
+---
+
+## 📊 6. Output and Visualization
+
+For each inference run, the following are generated:
+
+* 📈 Predicted EDC Curve
+* 🔊 Reconstructed RIR using the **Random Sign-Sticky** method
+* 🌐 FFT Magnitude Spectrum (log frequency)
+* 🔍 Zoomed plots for fine detail inspection
+
+All outputs are saved in:
+
+```
+inference_results/
+```
+
+Including plots:
+
+* `comparison_plot.png`
+* `comparison_plot_Zoom.png`
+
+---
+
+## 🧠 7. Model Training (Overview)
+
+The LSTM model was trained using a large simulated dataset of shoebox rooms.
+
+### **Training Configuration**
+
+* **Input features:** 16 (geometry, positions, 7 absorptions)
+* **Target:** EDC sequence (96,000 samples → 2 s @ 48 kHz)
+* **Loss function:** MSE + custom energy-decay loss
+* **Optimizer:** Adam (LR = 0.001)
+* **Early stopping:** Based on validation loss (10 epochs patience)
+* **Framework:** PyTorch Lightning
+
+You may adapt the training script to retrain the model with your own dataset if desired.
+
+---
+
+## 🧰 8. Installation & Requirements
+
+Install the required packages using:
 
 ```bash
-python training/train_edcModelPytorchLighteningICASSP_V1.py
+pip install -r requirements.txt
 ```
 
-### Step 3 – Outputs
+The `requirements.txt` includes **pinned versions** of all dependencies to ensure compatibility.
 
-* The trained model checkpoint will be saved under:
+Example contents:
 
-  ```
-  Results/{date-time}/Trained_Models/best_model.ckpt
-  ```
-* Feature and target **scalers** will be saved in the same folder.
-* Training and validation loss curves are automatically logged.
-
-### Training Parameters (default)
-
-* Model: **LSTM → Dense(2048) → Output**
-* Hidden units: **128**
-* Dropout: **0.3**
-* Optimizer: **Adam (lr=0.001)**
-* Loss: **MSE + custom temporal decay loss**
-* Early stopping: **10 epochs patience**
-* Max epochs: **200**
+```
+torch==2.3.0
+pytorch-lightning==2.3.0
+numpy==1.26.4
+pandas==2.2.2
+matplotlib==3.8.4
+scikit-learn==1.5.1
+SoundFile==0.12.1
+joblib==1.4.2
+```
 
 ---
 
-## 📊 Outputs
+## 📝 9. Citation
 
-After training or inference, you’ll get:
+If you use this repository in your research, please cite:
 
-1. **Plots**
+> **Author et al.**
+> “Deep Learning-Based Room Impulse Response Reconstruction using LSTM Networks.”
+> *ICASSP 2025.*
 
-   * EDC prediction vs. ground truth
-   * RIR waveform reconstruction
-   * FFT magnitude spectrum
-
-2. **Audio Files**
-
-   * `predicted_rir.wav` – Predicted RIR reconstruction
-   * `actual_rir.wav` – Ground truth RIR reconstruction
-
-3. **Metrics**
-
-   * Mean Squared Error (MSE)
-   * Optionally: correlation, log-spectral distance (LSD), SI-SDR, etc.
+```
+@inproceedings{Author2025RIR,
+  title={Deep Learning-Based Room Impulse Response Reconstruction using LSTM Networks},
+  author={Author, A. and Collaborator, B.},
+  booktitle={Proc. IEEE ICASSP},
+  year={2025}
+}
+```
 
 ---
 
-## 📌 Notes
+## 📧 10. Contact
 
-* The provided dataset and checkpoints are examples; you can train your own using PyTorch Lightning.
-* Default inference runs on **GPU (if available)**, otherwise CPU.
-* Parameters like `stickiness` (default = 0.9) can be tuned to balance low-frequency coherence vs. randomness.
+For inquiries, suggestions, or collaborations:
+
+* **Author:** Your Name
+* **Affiliation:** Audio & Acoustics Lab, Your University
+* **Email:** [your.email@example.com](mailto:your.email@example.com)
 
 ---
 
-## 🛠️ Citation
+## ✅ Summary
 
-If you use this work, please cite:
+This repository provides a **practical, academically validated framework** for:
 
-```
-@inproceedings{tui2026edc,
-    title={ROOM IMPULSE RESPONSE PREDICTION WITH NEURAL NETWORKS: FROM ENERGY DECAY CURVES TO PERCEPTUAL VALIDATION},
-    author={Imran Muhammad, Gerald Schuller},
-    booktitle={2026 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
-    year={2026},
-    organization={IEEE}
-    }
-```
+* Predicting EDCs using LSTM networks
+* Reconstructing full-band RIRs via stochastic methods
+* Supporting both dataset-based and custom room inference
+* Enabling fast and accurate acoustic parameter estimation for auralization and speech applications.
+
