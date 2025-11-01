@@ -59,7 +59,7 @@ This framework is applicable to:
 Before running inference, **download the dataset and pretrained model** from Zenodo:
 
 👉 [EDC Datset](https://zenodo.org/records/17210197): DOI: 10.5281/zenodo.17210196   
-👉 [EDC Datset](https://zenodo.org/records/17503961): DOI: 10.5281/zenodo.17503960
+👉 [EDC Datset](https://zenodo.org/records/17503961): DOI: 10.5281/zenodo.17503960  
 👉 [Model](https://zenodo.org/records/17215057): DOI: 10.5281/zenodo.17215057
 
 
