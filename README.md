@@ -61,8 +61,8 @@ Before running inference, **download the dataset and pretrained model** from Zen
 👉 [EDC Datset](https://zenodo.org/records/17210197): DOI: 10.5281/zenodo.17210196   
 👉 [RIR Datset](https://zenodo.org/records/17503961): DOI: 10.5281/zenodo.17503960  
 👉 [Model](https://zenodo.org/records/17215057): DOI: 10.5281/zenodo.17215057  
-👉 [RIR Measurements](https://cloud.tu-ilmenau.de/s/oqN3rcg4N2ETBza)  
-
+👉 [RIR Measurements](https://cloud.tu-ilmenau.de/s/oqN3rcg4N2ETBza)    
+👉 [Open Dataset RIR Measurements](https://github.com/RoyJames/room-impulse-responses)  
 
 
 After downloading:
