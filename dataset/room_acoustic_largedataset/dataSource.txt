@@ -1,5 +1,10 @@
-Download the data from
-
+LSTM Model:
+Download the data from (EDC Dataset)
 https://zenodo.org/records/17210197
-
 Unzip into a folde named: EDC under dataset/room_acoustic_largedataset/
+
+
+Conv. Net Model:
+Download the data from (RIR dataset)
+https://zenodo.org/records/17503961
+Unzip into a folde named: RIRs_equal_length in dataset/room_acoustic_largedataset
