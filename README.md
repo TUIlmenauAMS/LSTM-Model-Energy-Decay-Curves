@@ -225,7 +225,19 @@ If you use this repository in your research, please cite:
   DOI= {https://doi.org/10.48550/arXiv.2509.24834}
 }
 ```
-
+---
+```
+@article{Muhammad2026FromNumbers,
+  author    = {Muhammad, Imran and Schuller, Gerald},
+  title     = {From Numbers to Perception, Energy Decay Curves Prediction},
+  journal   = {arXiv preprint arXiv:2605.20968},
+  year      = {2026},
+  url       = {https://arxiv.org/abs/2605.20968},
+  eprint    = {2605.20968},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.SD}
+}
+`` 
 
 ---
 
