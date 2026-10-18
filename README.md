@@ -227,16 +227,19 @@ If you use this repository in your research, please cite:
 ```
 ---
 ```
-@article{Muhammad2026FromNumbers,
+@inproceedings{Muhammad2026FromNumbers,
   author    = {Muhammad, Imran and Schuller, Gerald},
   title     = {From Numbers to Perception, Energy Decay Curves Prediction},
-  journal   = {arXiv preprint arXiv:2605.20968},
+  booktitle = {Fortschritte der Akustik - DAGA 2026},
   year      = {2026},
-  url       = {https://arxiv.org/abs/2605.20968},
+  organization = {Deutsche Gesellschaft für Akustik (DEGA)},
+  url       = {https://pub.dega-akustik.de/DAGA_2026/files/upload/paper/109.pdf},
+  note      = {Also available as arXiv preprint arXiv:2605.20968},
   eprint    = {2605.20968},
   archivePrefix = {arXiv},
   primaryClass  = {cs.SD}
 }
+
 ``` 
 
 ---
