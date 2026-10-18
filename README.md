@@ -34,6 +34,10 @@ This framework is applicable to:
 
 ---
 
+[NotebookLM for our paper "From Numbers to Perception, Energy Decay Curves Prediction"](https://notebook.google.com/notebook/7e462410-5e70-43fe-8db3-0c2589c8f2ce)
+
+---
+
 ## 📂 2. Repository Structure
 
 ```
