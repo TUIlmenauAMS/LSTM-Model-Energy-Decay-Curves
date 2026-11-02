@@ -10,7 +10,7 @@
 
 This repository provides a **deep learning–based framework** for predicting **Energy Decay Curves (EDCs)** and reconstructing **Room Impulse Responses (RIRs)** directly from **room geometric and material properties**.
 
-The method uses a **Long Short-Term Memory (LSTM)** neural network trained on simulated room acoustic datasets, enabling accurate and efficient prediction of reverberation characteristics without running computationally expensive acoustic simulations.
+The method uses a **Long Short-Term Memory (LSTM)** and **CNN** neural network trained on simulated room acoustic datasets, enabling accurate and efficient prediction of reverberation characteristics without running computationally expensive acoustic simulations.
 
 ### **Inputs**
 
@@ -266,7 +266,7 @@ For inquiries, suggestions, or collaborations:
 
 This repository provides a **practical, academically validated framework** for:
 
-* Predicting EDCs using LSTM networks
+* Predicting EDCs using LSTM and CNN networks
 * Reconstructing full-band RIRs via stochastic methods
 * Supporting both dataset-based and custom room inference
 * Enabling fast and accurate acoustic parameter estimation for auralization and speech applications.
