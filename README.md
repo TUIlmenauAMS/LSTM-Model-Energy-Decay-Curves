@@ -258,7 +258,7 @@ For inquiries, suggestions, or collaborations:
 
 * **Contact:** Dr. Imran
 * **Affiliation:** Applied Media Systems, TU Ilmenau Germany
-* **Email:** [muhammad.imran@tu-ilmenau.de](mailto:muhammad.imran@tu-ilmenau.de)
+* **Email:** [m.imran@tu-braunschweig.de](mailto:m.imran@tu-braunschweig.de)
 
 ---
 
