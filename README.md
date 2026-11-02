@@ -35,7 +35,9 @@ This framework is applicable to:
 ---
 
 [NotebookLM for our paper "From Numbers to Perception, Energy Decay Curves Prediction"](https://notebook.google.com/notebook/7e462410-5e70-43fe-8db3-0c2589c8f2ce)
+
 [Our DAGA Dresden paper](https://pub.dega-akustik.de/DAGA_2026/files/upload/paper/109.pdf)
+
 [Our Speech and Audio in the Northeast 2026 poster](poster_sane2026.pdf)
 
 ---
